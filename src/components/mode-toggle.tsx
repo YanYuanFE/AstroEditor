@@ -1,7 +1,4 @@
-"use client"
-
 import * as React from "react"
-import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -12,8 +9,34 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+function getTheme(): "light" | "dark" {
+    if (typeof window === "undefined") return "dark"
+    return document.documentElement.classList.contains("dark") ? "dark" : "light"
+}
+
+function setTheme(theme: "light" | "dark" | "system") {
+    const resolved =
+        theme === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+            : theme
+    document.documentElement.classList.toggle("dark", resolved === "dark")
+    localStorage.setItem("theme", theme)
+}
+
 export function ModeToggle() {
-    const { setTheme } = useTheme()
+    const [, forceUpdate] = React.useReducer((x: number) => x + 1, 0)
+
+    React.useEffect(() => {
+        const saved = localStorage.getItem("theme") as "light" | "dark" | "system" | null
+        if (saved) setTheme(saved)
+    }, [])
+
+    const handleSetTheme = (theme: "light" | "dark" | "system") => {
+        setTheme(theme)
+        forceUpdate()
+    }
 
     return (
         <DropdownMenu>
@@ -25,13 +48,13 @@ export function ModeToggle() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+                <DropdownMenuItem onClick={() => handleSetTheme("light")}>
                     Light
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <DropdownMenuItem onClick={() => handleSetTheme("dark")}>
                     Dark
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
+                <DropdownMenuItem onClick={() => handleSetTheme("system")}>
                     System
                 </DropdownMenuItem>
             </DropdownMenuContent>

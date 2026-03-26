@@ -18,7 +18,7 @@ export const CairoEditor: React.FC<CairoEditorProps> = ({ value, onChange, heigh
             monaco.editor.defineTheme('cairoDark', cairoTheme as any);
 
             monaco.languages.registerCompletionItemProvider('cairo', {
-                provideCompletionItems: (model, position) => {
+                provideCompletionItems: (model: any, position: any) => {
                     const wordInfo = model.getWordUntilPosition(position);
                     const range = {
                         startLineNumber: position.lineNumber,
