@@ -10,7 +10,7 @@ interface CairoEditorProps {
     height?: string;
 }
 
-export const CairoEditor: React.FC<CairoEditorProps> = ({ value, onChange, height = "40vh" }) => {
+export const CairoEditor: React.FC<CairoEditorProps> = ({ value, onChange, height = "100%" }) => {
     useEffect(() => {
         loader.init().then(monaco => {
             monaco.languages.register({ id: 'cairo' });

@@ -1,12 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
+    './index.html',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   theme: {
     container: {
       center: true,
@@ -14,6 +12,11 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    fontFamily: {
+      sans: ["Inter", "system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"],
+      display: ['"Bricolage Grotesque"', "Inter", "system-ui", "sans-serif"],
+      mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
     },
     extend: {
       colors: {
@@ -49,6 +52,15 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        status: {
+          compiled: "hsl(var(--status-compiled))",
+          "compiled-bg": "hsl(var(--status-compiled-bg))",
+          declared: "hsl(var(--status-declared))",
+          "declared-bg": "hsl(var(--status-declared-bg))",
+          deployed: "hsl(var(--status-deployed))",
+          "deployed-bg": "hsl(var(--status-deployed-bg))",
+          success: "hsl(var(--status-success))",
         },
       },
       borderRadius: {

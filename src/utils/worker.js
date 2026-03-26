@@ -1,5 +1,5 @@
 
-import wasmCairo, { compileStarknetContract, runTests, runCairoProgram, compileCairoProgram, greet } from 'wasm-cairo';
+import wasmCairo, { compileStarknetContract, runTests, runCairoProgram, compileCairoProgram, compileCairoProject, runCairoProject, compileStarknetProject, runProjectTests, greet } from 'wasm-cairo';
 
 
 (async () => {
@@ -27,6 +27,20 @@ async function handleMessage (e) {
             break;
         case "runTest":
             result = runTests(data, true, false, true, true, false, false, true, true);
+            break;
+        case "compileCairoProject":
+            result = compileCairoProject(data, replaceIds);
+            break;
+        case "runCairoProject": {
+            const {availableGas: gas2, printFullMemory: pfm2, useDBGPrintHint: dbg2} = e.data;
+            result = runCairoProject(data, gas2, true, pfm2, false, dbg2);
+            break;
+        }
+        case "compileStarknetProject":
+            result = compileStarknetProject(data, true, replaceIds, e.data.outputCasm || false);
+            break;
+        case "runProjectTests":
+            result = runProjectTests(data, true, "", false, false, e.data.starknet || false, false, false);
             break;
         default:
             console.error(`Unexpected function: ${functionToRun}`);

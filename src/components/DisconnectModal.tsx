@@ -2,7 +2,7 @@ import { useAccount, useDisconnect } from "@starknet-react/core";
 import { Button } from "@/components/ui/button";
 import {useCopyToClipboard} from "react-use";
 import {useEffect} from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import {ChevronDown, Copy, Unlink, User} from "lucide-react";
 import {DropMenus} from "@/components/DropMenu";
 import {shortenAddress} from "@/utils/common";

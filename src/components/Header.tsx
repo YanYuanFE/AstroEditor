@@ -11,7 +11,7 @@ export const Header =() => {
         <div className="flex w-full items-center justify-between px-4 py-4 border-b">
             <div className="flex gap-2 items-center">
                 <a href="https://github.com/StarknetAstro/AstroEditor" target={'_blank'}>
-                    <img src={logo.src} className={'w-10 rounded-lg'} alt=""/>
+                    <img src={logo} className={'w-10 rounded-lg'} alt="Astro Editor" />
                 </a>
                 <div className="text-primary font-bold text-lg">Astro Editor</div>
             </div>
